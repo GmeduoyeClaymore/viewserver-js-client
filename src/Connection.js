@@ -1,7 +1,11 @@
 import Logger from 'common/Logger';
 import ProtoLoader from './core/ProtoLoader';
 import Rx from 'rxjs/Rx';
-import Config from 'react-native-config';
+
+export const Config = {
+  CONNECTION_ATTEMPT_DELAY : 1000,
+  CONNECTING_RETRY_ATTEMPTS : 100000,
+}
 
 export default class Connection {
   constructor(uri, network) {
