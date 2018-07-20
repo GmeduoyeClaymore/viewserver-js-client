@@ -45,6 +45,7 @@ export default class Connection {
     }
 
     tryConnect(attemptCounter, resolve, reject){
+  
       const uri = this._uris[attemptCounter % this._uris.length];
       Logger.info(`Attempting to connect to ${uri}`);
       this._socket = new WebSocket(uri);
@@ -65,8 +66,12 @@ export default class Connection {
         if (attemptCounter === Connection.CONNECTING_RETRY_ATTEMPTS ){
           reject(`Unable to detect open web socket to ${uri} after ${Connection.CONNECTING_RETRY_ATTEMPTS} retries`);
         } else {
-          Logger.info(`Attempt ${attemptCounter}/${Connection.CONNECTING_RETRY_ATTEMPTS} socket not connected. Socket state is ${this._socket.readyState} Trying again in ${Connection.CONNECTION_ATTEMPT_DELAY}ms`);
-          setTimeout(() => this.tryConnect(attemptCounter + 1, resolve, reject), Connection.CONNECTION_ATTEMPT_DELAY);
+          if( this._forcedClose ){
+            Logger.info(`Attempt ${attemptCounter}/${Connection.CONNECTING_RETRY_ATTEMPTS} socket not connected. Not trying again as client is closed`);
+          }else{
+            Logger.info(`Attempt ${attemptCounter}/${Connection.CONNECTING_RETRY_ATTEMPTS} socket not connected. Socket state is ${this._socket.readyState} Trying again in ${Connection.CONNECTION_ATTEMPT_DELAY}ms`);
+            setTimeout(() => this.tryConnect(attemptCounter + 1, resolve, reject), Connection.CONNECTION_ATTEMPT_DELAY);
+          }
         }
       };
       this._socket.onmessage = this.handleSocketMessage;
