@@ -185,7 +185,7 @@ export default class Client {
     const _this = this;
     const innerPromise = new Promise((resolve, reject) => {
       const resultObservable = Rx.Observable.fromPromise(commandExecutedPromise.promise);
-      resultSubscription = resultObservable.subscribe(
+      const resultSubscription = resultObservable.subscribe(
         ev => {
           Logger.fine(`Resolved!!! JSONCommand Controller: ${controllerName} Action: ${action} Payload ${JSON.stringify(ev)}`);
           resolve(ev);
