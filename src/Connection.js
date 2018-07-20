@@ -58,7 +58,7 @@ export default class Connection {
         _this.handleSocketOpen();
         resolve();
         _this._socket.onerror = undefined;
-        _this._connectionPromise = undefined;
+        _this._connectionPromise = Promise.resolve(true);
         _this._connectionSubject.next(true);
       };
 
@@ -169,6 +169,8 @@ export default class Connection {
       if (e.code > 1000 && e.wasClean === false){
         Logger.warning(`Error ${e.code} \'${reason}\' when closing socket`);
       }
+
+      _this._connectionPromise = undefined;
     }
 
     handleSocketMessage(evt) {
