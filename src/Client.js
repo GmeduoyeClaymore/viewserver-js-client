@@ -5,13 +5,13 @@ import OptionsMapper from './mappers/OptionsMapper';
 import RowEventMapper from './mappers/RowEventMapper';
 import ProjectionMapper from './mappers/ProjectionMapper';
 import ProtoLoader from './core/ProtoLoader';
-import Logger from 'common/Logger';
-import GenericJSONCommandPromise from 'common/promises/GenericJSONCommandPromise';
+import Logger from './common/Logger';
+import GenericJSONCommandPromise from './common/promises/GenericJSONCommandPromise';
 import Rx from 'rxjs/Rx';
 
 export default class Client {
   static Current;
-  constructor(url, {clientVersion, authenticationType = 'compatableVersionEvenlyDistributed'}) {
+  constructor(url, {clientVersion, authenticationType = 'open'}) {
     this.url = url;
     this.clientVersion = clientVersion;
     this.authenticationType = authenticationType;
