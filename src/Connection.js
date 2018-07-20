@@ -170,7 +170,7 @@ export default class Connection {
         Logger.warning(`Error ${e.code} \'${reason}\' when closing socket`);
       }
 
-      _this._connectionPromise = undefined;
+      this._connectionPromise = undefined;
     }
 
     handleSocketMessage(evt) {
