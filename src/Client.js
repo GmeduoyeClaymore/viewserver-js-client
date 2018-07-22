@@ -129,13 +129,12 @@ export default class Client {
     return this.sendCommand('subscribeReport', subscribeReportCommand, true, dataSink);
   };
 
-  subscribeToDimension = function (dimension, dataSourceName, reportContext, options, dataSink) {
+  subscribeToDimension = function (dimension, reportContext, options, dataSink) {
     const context = ReportContextMapper.toDto(reportContext);
     const optionsDto = OptionsMapper.toDto(options);
 
     const subscribeReportCommand = ProtoLoader.Dto.SubscribeDimensionCommandDto.create({
       dimension,
-      dataSourceName,
       context,
       options: optionsDto
     });
