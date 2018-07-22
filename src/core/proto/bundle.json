@@ -1058,11 +1058,6 @@
           "type": "Dimension",
           "id": 3
         },
-        "childContexts": {
-          "rule": "repeated",
-          "type": "ReportContextDto",
-          "id": 4
-        },
         "output": {
           "type": "string",
           "id": 5
@@ -1072,7 +1067,7 @@
           "type": "Dimension",
           "id": 6
         },
-        "multiContextMode": {
+        "dataSourceName": {
           "type": "string",
           "id": 7
         }
